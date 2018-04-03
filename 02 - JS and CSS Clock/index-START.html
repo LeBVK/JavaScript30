@@ -55,19 +55,39 @@
       height: 100%;
       transform: translateY(-3px); /* account for the height of the clock hands */
     }
-
     .hand {
       width:50%;
       height:6px;
       background:black;
       position: absolute;
       top:50%;
+      transform-origin: 100%;
+      transition: all 0.1s;
+      transition-timing-function: ease;
     }
 
   </style>
 
   <script>
+    function setDate() {
+      const now = new Date();
+      const nowSec = now.getSeconds();
+      const nowMin = now.getMinutes();
+      const nowHour = now.getHours();
 
+      console.log(nowSec);
+
+      const secondHand = document.querySelector('.second-hand');
+      secondHand.style.transform = `rotate(${nowSec * 6 + 90}deg)`;
+
+      const minHand = document.querySelector('.min-hand');
+      minHand.style.transform = `rotate(${nowMin * 6 + 90}deg)`;
+
+      const hourHand = document.querySelector('.hour-hand');
+      hourHand.style.transform = `rotate(${nowHour * 10 + 90}deg)`;
+    }
+
+    setInterval(setDate, 1000);
 
   </script>
 </body>
