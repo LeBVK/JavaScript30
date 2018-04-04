@@ -31,28 +31,56 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    function born1500(e) {
+      return (e.year <= 1599) && (e.year >= 1500);
+    }
+    inventors.filter(born1500);
+    inventors.filter(inventor => (inventor.year <= 1599) && (inventor.year >= 1500));
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    // console.table(inventors);
+    inventors.map(inventor => `${inventor.first} ${inventor.last}`);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    inventors.sort(function (a,b) {
+      return a.year - b.year;
+    });
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const totalYears = inventors.reduce((total, inventor) => total + inventor.passed - inventor.year, 0);
 
     // 5. Sort the inventors by years lived
+    inventors.sort(function (a,b) {
+      return (a.passed - a.year) < (b.passed - b.year) ? 1 : -1;
+    });
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    // const list = document.querySelector('.mw-category');
+    // list.innerText.split("\n").filter(street => street.includes("de"))
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    people.sort(function(a,b) {
+      aLast = a.split(", ")[0];
+      bLast = b.split(", ")[0];
+      return aLast.localeCompare(bLast);
+    });
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const transportation = data.reduce(function(counter, item) {
+      if (!counter[item]) {
+        counter[item] = 0
+      };
+      counter[item] += 1;
+      return counter;
+    }, {});
+    console.log(transportation);
 
   </script>
 </body>
